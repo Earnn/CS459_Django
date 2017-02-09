@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block content %}
+<!-- {% load static %} -->
+<div class="container">
+ 
+    <center>
+        <img class="img-thumbnail" src="{{ imageShow.image.url }}" height="300" width="300">
+        <br>
+        <p>{{imageShow.description}}</p>
+       
+        <br> {{listImg}}
+    </center>
+</div>
+</div>
+{% endblock %}

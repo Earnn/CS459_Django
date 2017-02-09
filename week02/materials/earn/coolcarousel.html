@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- 
+			This carousel example is created with jQuery and the carouFredSel-plugin.
+			http://jquery.com
+			http://caroufredsel.frebsite.nl
+		-->
+
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1" />
+		<meta name="description" value="Example of a cool slideshow created with two carousels working together with animated scrolling thumbnails." />
+		<meta name="keywords" value="diashow, slideshow, thumbnails, slider, carousel, example, imageviewer" />
+		<title>Car Gallery</title>
+
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
+		<script src="jquery.carouFredSel-6.0.4-packed.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(function() {
+
+				//	wrap all thumbs in a <div> for the 3x3 grid
+				$div = null;
+				$('#thumbs').children().each(function(i) {
+					if ( i % 9 == 0) {
+						$div = $( '<div />' );
+						$div.appendTo( '#thumbs' );
+					}
+					$(this).appendTo( $div );
+					$(this).addClass( 'itm'+i );
+					$(this).click(function() {
+						$('#images').trigger( 'slideTo', [i, 0, true] );
+					});
+				});
+				$('#thumbs img.itm0').addClass( 'selected' );
+
+				//	the big-image carousel
+				$('#images').carouFredSel({
+					direction: 'up',
+					circular: false,
+					infinite: false,
+					width: 350,
+					height: 350,
+					items: 1,
+					auto: false,
+					prev: '#prev .images',
+					next: '#next .images',
+					scroll: {
+						fx: 'directscroll',
+						onBefore: function() {
+							var pos = $(this).triggerHandler( 'currentPosition' );
+							$('#thumbs img').removeClass( 'selected' );
+							$('#thumbs img.itm'+pos).addClass( 'selected' );
+							
+							var page = Math.floor( pos / 9 );
+							$('#thumbs').trigger( 'slideToPage', page );
+						}
+					}
+				});
+
+				//	the thumbnail-carousel
+				$('#thumbs').carouFredSel({
+					direction: 'up',
+					circular: false,
+					infinite: false,
+					width: 350,
+					height: 350,
+					items: 1,
+					align: false,
+					auto: false,
+					prev: '#prev .thumbs',
+					next: '#next .thumbs'
+				});
+			});
+		</script>
+		<style type="text/css">
+			html, body {
+				height: 100%;
+				padding: 0;
+				margin: 0;
+			}
+			body {
+				min-height: 600px;
+			}
+			body * {
+				font-family: Arial, Geneva, SunSans-Regular, sans-serif;
+				font-size: 14px;
+				color: #333;
+				line-height: 22px;
+			}
+			#wrapper {
+				border: 1px solid #ddd;
+				background-color: #fff;
+				width: 750px;
+				height: 350px;
+				padding: 50px 25px 50px 50px;
+				margin: -225px 0 0 -412px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+			}
+			#wrapper img {
+				display: block;
+				float: left;
+			}
+			#images, #thumbs {
+				height: 350px;
+				float: left;
+				overflow: hidden;
+			}
+			#images {
+				width: 350px;
+			}
+			#thumbs {
+				width: 375px;
+				margin-left: 25px;
+			}
+			#thumbs img {
+				border: 1px solid #ccc;
+				padding: 14px;
+				margin: 0 25px 25px 0;
+				cursor: pointer;
+			}
+			#thumbs img.selected, #thumbs img:hover {
+				border-color: #333;
+			}
+			
+			#thumbs div {
+				width: 375px;
+				height: 350px;
+				float: left;
+			}
+			#prev a, #next a {
+				text-decoration: none;
+				font-size: 20px;
+				color: #999;
+				position: absolute;
+			}
+			#prev a:hover, #next a:hover {
+				color: #000;
+			}
+			#prev a.disabled, #next a.disabled {
+				display: none !important;
+			}
+			#prev a {
+				top: 15px;
+			}
+			#next a {
+				bottom: 15px;
+			}
+			a.images {
+				left: 220px;
+			}
+			a.thumbs {
+				right: 220px;
+			}
+			
+			#source {
+				text-align: center;
+				width: 400px;
+				margin: 0 0 0 -200px;
+				position: absolute;
+				bottom: 10px;
+				left: 50%;
+			}
+			#source, #source a {
+				color: #999;
+				font-size: 12px;
+			}
+			
+			#donate-spacer {
+				height: 100%;
+			}
+			#donate {
+				border-top: 1px solid #999;
+				width: 750px;
+				padding: 50px 75px;
+				margin: 0 auto;
+				overflow: hidden;
+			}
+			#donate p, #donate form {
+				margin: 0;
+				float: left;
+			}
+			#donate p {
+				width: 650px;
+			}
+			#donate form {
+				width: 100px;
+			}
+		</style>
+	</head>
+	<body>
+	<br>
+	<center>
+	<h1 style="font-size: 30px;color: black">Car Gallery</h1>
+		
+	</center>
+		<div id="wrapper">
+			<div id="prev">
+				<a href="#" class="images">&uArr; </a>
+				<a href="#" class="thumbs">&uArr; </a>
+			</div>
+			<div id="images">
+				<img src="img/large/ek-aanhanger.gif" alt="ek-aanhanger" width="350" height="350" />
+				<img src="img/large/ek-alien.gif" alt="ek-alien" width="350" height="350" />
+				<img src="img/large/ek-artsen.gif" alt="ek-artsen" width="350" height="350" />
+				<img src="img/large/ek-brandweer.gif" alt="ek-brandweer" width="350" height="350" />
+				<img src="img/large/ek-dommel.gif" alt="ek-dommel" width="350" height="350" />
+				<img src="img/large/ek-freudiaans.gif" alt="ek-freudiaans" width="350" height="350" />
+				<img src="img/large/ek-kamikazepiloot.gif" alt="ek-kamikazepiloot" width="350" height="350" />
+				<img src="img/large/ek-langselkaarheen.gif" alt="ek-langselkaarheen" width="350" height="350" />
+				<img src="img/large/ek-perswee.gif" alt="ek-perswee" width="350" height="350" />
+				<img src="img/large/ek-politiekannietzeggen.gif" alt="ek-politiekannietzeggen" width="350" height="350" />
+				<img src="img/large/ek-rollenpatroon.gif" alt="ek-rollenpatroon" width="350" height="350" />
+				<img src="img/large/ek-suikerspin.gif" alt="ek-suikerspin" width="350" height="350" />
+				<img src="img/large/ek-uitvallen.gif" alt="ek-uitvallen" width="350" height="350" />
+				<img src="img/large/ek-vaassen.gif" alt="ek-vaassen" width="350" height="350" />
+				<img src="img/large/ek-vreedzaamverzet.gif" alt="ek-vreedzaamverzet" width="350" height="350" />
+				<img src="img/large/ek-zelfspotter.gif" alt="ek-zelfspotter" width="350" height="350" />		
+			</div>
+			<div id="thumbs">
+				<img src="img/small/ek-aanhanger.gif" alt="ek-aanhanger" width="70" height="70" />
+				<img src="img/small/ek-alien.gif" alt="ek-alien" width="70" height="70" />
+				<img src="img/small/ek-artsen.gif" alt="ek-artsen" width="70" height="70" />
+				<img src="img/small/ek-brandweer.gif" alt="ek-brandweer" width="70" height="70" />
+				<img src="img/small/ek-dommel.gif" alt="ek-dommel" width="70" height="70" />
+				<img src="img/small/ek-freudiaans.gif" alt="ek-freudiaans" width="70" height="70" />
+				<img src="img/small/ek-kamikazepiloot.gif" alt="ek-kamikazepiloot" width="70" height="70" />
+				<img src="img/small/ek-langselkaarheen.gif" alt="ek-langselkaarheen" width="70" height="70" />
+				<img src="img/small/ek-perswee.gif" alt="ek-perswee" width="70" height="70" />
+				<img src="img/small/ek-politiekannietzeggen.gif" alt="ek-politiekannietzeggen" width="70" height="70" />
+				<img src="img/small/ek-rollenpatroon.gif" alt="ek-rollenpatroon" width="70" height="70" />
+				<img src="img/small/ek-suikerspin.gif" alt="ek-suikerspin" width="70" height="70" />
+				<img src="img/small/ek-uitvallen.gif" alt="ek-uitvallen" width="70" height="70" />
+				<img src="img/small/ek-vaassen.gif" alt="ek-vaassen" width="70" height="70" />
+				<img src="img/small/ek-vreedzaamverzet.gif" alt="ek-vreedzaamverzet" width="70" height="70" />
+				<img src="img/small/ek-zelfspotter.gif" alt="ek-zelfspotter" width="70" height="70" />
+			</div>
+			<div id="next">
+				<a href="#" class="images">&dArr; </a>
+				<a href="#" class="thumbs">&dArr; </a>
+			</div>
+		</div>
+		
+		
+		
+	</body>
+</html>
