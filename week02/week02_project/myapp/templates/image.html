@@ -25,13 +25,13 @@ html {
 label {
     color: #e2ad61;
     font-size: 20;
-    margin-left: 20px;
+    margin-left: 10px;
   	margin-bottom: 10px;
 }
 </style>
 <div class="container">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <center>
             <!-- <div style="width: 700px;height: 650px;background-color: white"> -->
                 
@@ -46,15 +46,15 @@ label {
                  </div>
             </center>
         </div>
-        <div class="col-md-2">
-            <div  style="background-image: url(http://www.arcawood.com/images/siteBackground.jpg);height: 100%" >
+        <div class="col-md-12">
+            <div  >
 
                 <label> History</label>
                 <center>
                      {% for fimage in preImage %}
                     <!-- <div class="col-md-4"> -->
                     <a href="{% url 'image' fimage.id %} ">
-                        <img style="margin-left: 40px;margin-bottom: 10px"  src="{{ fimage.image.url }}" height="100" width="100">
+                        <img style="margin-left: 10px;margin-bottom: 10px"  src="{{ fimage.image.url }}" height="100" width="100">
                     </a>
                     <!-- <p id="desText">{{imageShow.description}}</p> -->
                     <!-- </div> -->
