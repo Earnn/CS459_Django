@@ -1,38 +1,40 @@
 {% extends "base.html" %} {% block content %}
 <!-- {% load static %} -->
 <div class="container">
-    <h1>Gallery</h1>
-    <!-- <img src="{{ MEDIA_URL }}{{ image.imgfile.name }}"></img> -->
-    <!-- {{ vegetable }} -->
-    <!-- <div class="container"> -->
-    <!-- </div> -->
-    <!-- <img src="{% static fimage.image.url %}" alt="My image"/> -->
-    <!--  <p>{{fimage.image.url}}</p> -->
-    <!-- {{message}} -->
-    <!-- <br>{{exp}} -->
-  <!--   <br> {% for i in session_list %} {{i}}
-    <br> {% endfor %} -->
-    <!-- {{number}} -->
+<center> 
+
+    <h1 style="color: #e2ad61;font-size: 45px">Gallery</h1>
+    <br>	
+</center>
+  
 </div>
-
-<div class="row">
+<style>body,html{
+	background-image: url(http://reasonerlandscaping.com/wp-content/uploads/2013/02/Wood-Background.jpg);
+		/*background-color: #F1F2ED;*/
+}
+#desText {
+    color: #fc9a7a;
+    font-size: 20px;
+    font-weight: bold;
+}
+</style>
+<div class="row" >
     {% for fimage in image_list %}
-    <center>
-        <div class="col-md-3">
-
-         <!-- <a href="{{fimage.image.url}}"> -->
-
-
+    <center >
+        <div class="col-md-2" >
+            <!-- <a href="{{fimage.image.url}}"> -->
             <a href="{% url 'image' fimage.id %} ">
-
-        <!-- <a href="gallery/{{fimage.id}}"> -->
-                <img   class="img-thumbnail" src="{{ fimage.image.url }}" height="300" width="300">
+                <!-- <a href="gallery/{{fimage.id}}"> -->
+                <img  src="{{ fimage.image.url }}" height="195" width="195">
             </a>
-             <!-- </a> -->
-
-            <p>{{fimage.description}}</p>
+            <!-- </a> -->
+            <br>	  
+            <p id="desText">{{fimage.description}}</p>
+            <br>	
         </div>
+           <!--  <br> -->
     </center>
+
     {% endfor %}
 </div>
 {% endblock %}

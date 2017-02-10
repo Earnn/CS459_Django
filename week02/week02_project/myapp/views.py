@@ -35,21 +35,34 @@ def CarGallery(request):
 def showImage(request,num="1"):
 	number = num
 	imageShow = Image.objects.get(id=number)
-	# print imageShow.image.url
+
 	listImg = request.session.get('key',[])
-	listImg.append(number)
+	if number in listImg:
+		pass
+	else:
+		listImg.append(number)
+	
 	request.session['key'] = listImg
 	if len(listImg)==1:
 		request.session.set_expiry( 5 )
 
-	for i in Session.objects.all():
-		print SessionStore().decode(i.session_data)
+	preImage= [] 
+	if len(preImage) <=5:
+		for i in listImg:
+			preImage.append(Image.objects.get(id=i))
+
+	
+		# print preImage.image.url
+	# for i in Session.objects.all():
+		# print SessionStore().decode(i.session_data)
+		# print i
     	# print SessionStore().decode(i.session_data)
 
 	return render(request, 'image.html', {
 		'imageShow': Image.objects.get(id=num),
 		'number': number,
 		'listImg':listImg,
+		'preImage':preImage,
 			 })
 
 

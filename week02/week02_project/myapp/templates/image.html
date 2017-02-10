@@ -1,14 +1,74 @@
 {% extends "base.html" %} {% block content %}
 <!-- {% load static %} -->
+<style>
+body,
+html {
+       background-image: url(http://reasonerlandscaping.com/wp-content/uploads/2013/02/Wood-Background.jpg);
+    /*background-image: url(http://www.obriens.ie/images/background-wood.jpg);*/
+        /*background-color: #F1F2ED;*/
+    /*background-color: #F1F2ED;*/
+  
+}
+
+#sizeImg {
+    color: #96948F;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#desText {
+    color: #fc9a7a;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+label {
+    color: #e2ad61;
+    font-size: 20;
+    margin-left: 20px;
+  	margin-bottom: 10px;
+}
+</style>
 <div class="container">
- 
-    <center>
-        <img class="img-thumbnail" src="{{ imageShow.image.url }}" height="300" width="300">
-        <br>
-        <p>{{imageShow.description}}</p>
-       
-        <br> {{listImg}}
-    </center>
+    <div class="row">
+        <div class="col-md-10">
+            <center>
+            <!-- <div style="width: 700px;height: 650px;background-color: white"> -->
+                
+ <!-- class="img-thumbnail"  -->
+
+            <div >
+                <img class="img-thumbnail" style="margin-top: 10px"src="{{ imageShow.image.url }}" height="350" width="450">
+                <br><br>
+                <p id="desText">{{imageShow.description}}</p>
+                <!-- {{listImg}} -->
+                <p id="sizeImg">size: 500x500</p>
+                 </div>
+            </center>
+        </div>
+        <div class="col-md-2">
+            <div  style="background-image: url(http://www.arcawood.com/images/siteBackground.jpg);height: 100%" >
+
+                <label> History</label>
+                <center>
+                     {% for fimage in preImage %}
+                    <!-- <div class="col-md-4"> -->
+                    <a href="{% url 'image' fimage.id %} ">
+                        <img style="margin-left: 40px;margin-bottom: 10px"  src="{{ fimage.image.url }}" height="100" width="100">
+                    </a>
+                    <!-- <p id="desText">{{imageShow.description}}</p> -->
+                    <!-- </div> -->
+
+                    {% endfor %}
+                    <br>
+                    <br>
+                </center>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-{% endblock %}
+<br>
+<br>
+<br>
+<br>
+<br>{% endblock %}
