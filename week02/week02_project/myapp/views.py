@@ -44,7 +44,7 @@ def showImage(request,num="1"):
 	
 	request.session['key'] = listImg
 	if len(listImg)==1:
-		request.session.set_expiry( 5 )
+		request.session.set_expiry( 60 )
 
 	preImage= [] 
 	if len(preImage) <=5:
